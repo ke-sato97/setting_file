@@ -1,0 +1,65 @@
+snippet ba "before_action"
+before_action :${1:method_name}, only: %i[${2:action_name}]
+endsnippet
+
+snippet bt "belongs_to (bt)"
+belongs_to :${1:object}${2:, class_name: "${3:${1/[[:alpha:]]+|(_)/(?1::\u$0)/g}}", foreign_key: "${4:$1_id}"}
+endsnippet
+
+snippet cu "current_user"
+current_user
+endsnippet
+
+snippet @mo "@model = Model."
+@${1:model} = ${1/\w+/\u$0/}.
+endsnippet
+
+snippet defp "description"
+def ${1:model}_params
+	params.require(:$1).permit(:${2:colmin}, :${3:colmin})
+end
+endsnippet
+
+snippet flash "flash.now"
+flash.now[:${1:danter}] = '${2:frash message}'
+endsnippet
+
+snippet hm "has_many (hm)"
+has_many :${1:object}s${2:, class_name: "$1", foreign_key: "${4:reference}_id"}
+endsnippet
+
+snippet lt "ledirect_to"
+redirect_to ${1:action}_path
+endsnippet
+
+snippet (p) "(params[:params])"
+(params[:${1:params}])
+endsnippet
+
+snippet render "render"
+render :
+endsnippet
+
+snippet len "length: {}"
+length: { maximum: $0 }
+endsnippet
+
+snippet onl "only"
+only: %i[$0]
+endsnippet
+
+snippet bin "binding.pry"
+binding.pry
+endsnippet
+
+snippet rep "redirect_to (path)"
+redirect_to(${2:${12:model}_path(${13:@}${14:$12})})
+endsnippet
+
+snippet res "resources"
+resources :${1:posts}
+endsnippet
+
+snippet val "validates"
+validates :${1:attribute}, presence: true
+endsnippet

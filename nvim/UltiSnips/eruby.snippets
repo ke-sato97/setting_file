@@ -1,0 +1,42 @@
+snippet form_with "form_with" b
+<%= form_with(model: @${1:model}, url: $1s_path) do |${2:form}| %>
+	${0}
+<% end %>
+endsnippet
+
+snippet fl "label" b
+<%= ${1:form}.label :${3:label_name} %>
+endsnippet
+
+snippet fta "text_area" b
+<%= ${1:form}.text_area :${2:label_name}, class: '${3:class_name}', ${4:options} %>
+endsnippet
+
+snippet ftf "text_field" b
+<%= ${1:form}.text_field :${2:label_name}, class: '${3:class_name}' %>
+endsnippet
+
+snippet fs "select" b
+<%= ${1:form}.select :${2:label_name}, :class: '${3:class_name}', ${4:collection}, ${4:options} %>
+endsnippet
+
+snippet fcb "check_box" b
+<%= ${1:form}.check_box :${2:label_name}, :class: '${3:class_name}', ${4:options} %>
+endsnippet
+
+snippet frb "radio_button" b
+<%= ${1:form}.radio_button :${2:label_name}, :class: '${3:class_name}', ${4:value}, ${5:options} %>
+endsnippet
+
+snippet fsubmit "submit" b
+<%= ${1:form}.submit class: '${2:btn_name}' %>
+endsnippet
+
+snippet render "render"
+<%= render '${1:file}', ${2:local}: @${3:instance} %>
+endsnippet
+
+snippet bin "binding.pry"
+<% binding.pry %>
+endsnippet
+
