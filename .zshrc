@@ -81,11 +81,15 @@ alias ll="ls -l"
 # laで隠しファイル含めた詳細情報を表示
 alias la="ls -la"
 
+# mkdirで必要に応じて親ファイルも作成
+alias mkdir="mkdir -p"
+
 # ..で1つ上のディレクトリに移動
 alias ..="cd .."
 
 # :qで終了
 alias :q="exit"
+
 
 # rails関係のalias
 # rsで"bin/rails server"を実行する
@@ -96,6 +100,33 @@ alias rc="bin/rails console"
 
 # rでbin/railsを補完する
 alias r="bin/rails"
+
+# rrでbin/rails routesを補完する
+alias rr="bin/rails routes"
+
+# migrateでbin/rails db:migrateを補完する
+alias migrate="bin/rails db:migrate"
+
+# statusでbin/rails db:migrateを補完する
+alias status="bin/rails db:migrate:status"
+
+# rollbackでbin/rails db:rollbackを補完する
+alias rollback="bin/rails db:rollback"
+
+# createでbin/rails db:createを補完する
+alias create="bin/rails db:create"
+
+# bvでbundle execを補完する
+alias be="bundle exec"
+
+# bでbundle installを補完する
+alias b="bundle install"
+
+# gemでgem installを補完する
+alias gem="gem install"
+
+# bvでbin/devを補完する(rails7以降)
+alias bv="bin/dev"
 
 
 # 補完機能関係
