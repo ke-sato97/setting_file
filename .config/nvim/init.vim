@@ -12,16 +12,17 @@ set wildmenu
 set noswapfile
 set statusline+=\ %{tabpagenr()}
 set fileencodings=utf-8,cp932
-set wildmenu
-" set number
+set splitright
+set number
 
-" スペースキーに変更
-let mapleader = "\<Space>"
 
 " 保存時に行末の空白を除去する
 autocmd BufWritePre * :%s/\s\+$//ge
 
+
 " キーマップの設定変更
+" <Leader>キーをスペースキーに設定
+let mapleader = "\<Space>"
 " 括弧内にカーソルを合わせる
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
@@ -30,7 +31,7 @@ inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
 inoremap < <><LEFT>
 " ESCキーをjkに変更
-inoremap jk <ESC>
+inoremap jj <ESC>
 " Escの2回押しでハイライト消去"
 nnoremap <ESC><ESC> :nohlsearch<CR>
 " Ctrl + aで行頭に移動
@@ -53,7 +54,7 @@ nnoremap <Leader>t :tabe
 " <Space>eで:editと入力される
 nnoremap <Leader>e :edit
 
-" :Rでrubyファイルを保存して実行する
+" :Rで.rbファイルを保存して実行する
 command! R w | !ruby %
 
 " :Vでinit.vimファイルを保存して実行する
@@ -86,23 +87,24 @@ endfunction "}}}
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 set showtabline=2 " 常にタブラインを表示
 
-" tをプレフィックスキーに設定
+" <leader>をプレフィックスキーに設定
 nnoremap    [Tag]   <Nop>
 nmap    <leader> [Tag]
-" t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
+" <leader>1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
 for n in range(1, 9)
   execute 'nnoremap <silent> [Tag]'.n  ':<C-u>tabnext'.n.'<CR>'
 endfor
 
-" tc 新しいタブを一番右に作る
+" <leader>c 新しいタブを一番右に作る
 map <silent> [Tag]c :tablast <bar> tabnew<CR>
-" tx タブを閉じる
+" <leader>x タブを閉じる
 map <silent> [Tag]x :tabclose<CR>
-" tl 次のタブ
+" <leader>l 次のタブ
 map <silent> [Tag]l :tabnext<CR>
-" th 前のタブ
+" <leader>h 前のタブ
 map <silent> [Tag]h :tabprevious<CR>
 
+" <Leader>oで分割した画面の移動
 nnoremap <Leader>o <C-w><C-w>
 
 
@@ -127,7 +129,7 @@ call plug#end()
 set hlsearch
 colorscheme material
 hi Search ctermbg=lightcyan ctermfg=black
-hi visual ctermbg=lightcyan ctermfg=NONE
+hi visual ctermbg=darkgray ctermfg=NONE
 hi Pmenu ctermbg=black
 hi PmenuSel ctermbg=lightmagenta ctermfg=black
 " tabline
@@ -143,9 +145,9 @@ let g:python3_host_prog = '/usr/bin/python3'
 " ultisnips の有効化
 " Tabでスニペット展開
 let g:UltiSnipsExpandTrigger="<tab>"
-" tabを押すと次のフィールドに移動
+" Ctrl + lで次のフィールドに移動
 let g:UltiSnipsJumpForwardTrigger='<c-l>'
-" Shift + Tabで前のフィールドに移動
+" Ctrl + hで前のフィールドに移動
 let g:UltiSnipsJumpBackwardTrigger='<c-h>'
 " スニペットの編集する時にウィンドウを縦に分割する
 let g:UltiSnipsEditSplit='vertical'
@@ -155,21 +157,8 @@ let g:coc_snippet_prev = '<C-p>'
 " <Leader>sを:UltiSnipsEditコマンドに割り当て
 nnoremap <silent> <Leader>s :UltiSnipsEdit<CR>
 
-" coc.nvimの設定変更
-" imap <silent> <C-s> <Plug>(coc-snippets-expand)
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction
-" inoremap <silent><expr> <Tab>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<Tab>" :
-"       \ coc#refresh()
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-
-" <leader>igでindent-blankline.nvimの表示・非表示を切り替える
+" <leader>igでindent-blankline.nvimの表示・非表示を切り替える ※最初だけ２回
 let g:indent_blankline_enabled = 1
 
 function! ToggleIndentBlankline()
@@ -190,5 +179,5 @@ nnoremap <leader>ig :call ToggleIndentBlankline()<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
-" Ctrl+eでNERDTreeが起動する
-nnoremap <silent><C-n> :NERDTreeToggle<CR>
+" <leader>eでNERDTreeが起動する
+nnoremap <silent><leader>n :NERDTreeToggle<CR>
