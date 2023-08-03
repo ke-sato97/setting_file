@@ -18,6 +18,7 @@ eval "$(rbenv init - zsh)"
 eval "$(pyenv init -)"
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
+
 # カスタムプロンプト関数
 function my_custom_prompt {
   local git_branch
@@ -45,27 +46,27 @@ precmd() {
   my_custom_prompt
 }
 
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
 
 # lsでカラー表示するための設定
 alias ls='gls --color=auto'
-# eval "$(gdircolors ~/.dircolors-solarized/dircolors.256dark)"
 
 
 # 設定ファイル関係
 # vimと入力するとNeovimが起動する
 alias vim="nvim"
 
-# vntでneovimの設定ファイルを開く
-alias viminit="nvim ~/.config/nvim/init.vim"
+# initvimでneovimの設定ファイルを開く
+alias initvim="nvim ~/.config/nvim/init.vim"
 
-# vrcでvimの設定ファイルを開く
+# vimrcでvimの設定ファイルを開く
 alias vimrc="vi ~/.vimrc"
 
-# vtmでtmuxの設定ファイルを開く
-alias vimtmux="vim ~/.tmux.conf"
+# vxでtmuxの設定ファイルを開く
+alias vx="vim ~/.tmux.conf"
 
 # vzでZshの設定ファイルを開く
 alias vz="vim ~/.zshrc"
@@ -104,26 +105,32 @@ alias r="bin/rails"
 # rrでbin/rails routesを補完する
 alias rr="bin/rails routes"
 
-# migrateでbin/rails db:migrateを補完する
-alias migrate="bin/rails db:migrate"
+# rmigrateでbin/rails db:migrateを補完する
+alias rmigrate="bin/rails db:migrate"
 
-# statusでbin/rails db:migrateを補完する
-alias status="bin/rails db:migrate:status"
+# rstatusでbin/rails db:migrate:statusを補完する
+alias rstatus="bin/rails db:migrate:status"
 
-# rollbackでbin/rails db:rollbackを補完する
-alias rollback="bin/rails db:rollback"
+# rmigrateresetでbin/rails db:migrate:resetを補完する
+alias rmigratereset="bin/rails db:migrate:reset"
 
-# createでbin/rails db:createを補完する
-alias create="bin/rails db:create"
+# rresetでbin/rails db:resetを補完する
+alias rreset="bin/rails db:reset"
+
+# rbackでbin/rails db:rollbackを補完する
+alias rback="bin/rails db:rollback"
+
+# rcreateでbin/rails db:createを補完する
+alias rcreate="bin/rails db:create"
+
+# rdropでbin/rails db:dropを補完する
+alias rdrop="bin/rails db:drop"
 
 # bvでbundle execを補完する
 alias be="bundle exec"
 
 # bでbundle installを補完する
 alias b="bundle install"
-
-# gemでgem installを補完する
-alias gem="gem install"
 
 # bvでbin/devを補完する(rails7以降)
 alias bv="bin/dev"
@@ -145,3 +152,4 @@ zstyle ':completion:*' menu select
 
 # 補完候補をできるだけ詰めて表示する
 setopt list_packed
+
