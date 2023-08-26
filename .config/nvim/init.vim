@@ -10,7 +10,6 @@ set clipboard=unnamed
 set laststatus=0
 set wildmenu
 set noswapfile
-" set statusline+=\ %{tabpagenr()}
 set fileencodings=utf-8,cp932
 set splitright
 set number
@@ -37,38 +36,44 @@ inoremap jj <ESC>
 nnoremap <ESC><ESC> :nohlsearch<CR>
 " Hで行頭に移動
 nnoremap H ^
+vnoremap H ^
 " Lで行末に移動
 nnoremap L $
-" Jで画面一番上の行に移動
+vnoremap L $
+" Jで10行下に移動
 nnoremap J 10j
-" Kで画面一番下の行に移動
+" Kで10行上に移動
 nnoremap K 10k
 " Uでredoする
 nnoremap U <C-r>
 " <C-z>で数字を増やす
 nnoremap <C-z> <C-a>
-" space aで全選択
+" <Leader>aで全選択
 nnoremap <Leader>a ggVG
-" <Space>tで:tabeと入力される
+" <Leader>tで:tabeと入力される
 nnoremap <Leader>t :tabe
-" <Space>eで:editと入力される
+" <Leader>eで:editと入力される
 nnoremap <Leader>e :edit
-" <Leader>jで前のbuffer
+" <Space>jで前のbuffer
 nnoremap <Space>j :bprev<CR>
-" <Leader>kで次のbuffer
+" <Space>kで次のbuffer
 nnoremap <Space>k :bnext<CR>
 " <Leader>oで分割した画面の移動
 nnoremap <Leader>o <C-w><C-w>
-
+" <Leader>vsで縦に画面分割
+nnoremap vs :vsplit<CR>
 " Qで強制終了
 nnoremap Q :q!<CR>
-" :Rで.rbファイルを保存して実行する
-command! R w | !ruby %
-" :Vでinit.vimファイルを保存して実行する
-command! V w | source %
-" :vsでvsしつつFZF起動
-command! VS vsplit | FZF
+" vvでビジュアル矩形モード
+vnoremap v <C-v>
 
+" :rで.rbファイルを保存して実行する
+command! R w | !ruby %
+" :vでinit.vimファイルを保存して実行する
+command! V w | source %
+""nnoremap  :V
+
+command! -nargs=1 -complete=help Vh :vertical belowright help <args>
 
 " タブの表示及び移動の設定
 " Anywhere SID.
@@ -121,7 +126,6 @@ nnoremap <Leader>o <C-w><C-w>
 " vim-plugでプラグイン管理
 call plug#begin()
 Plug 'preservim/nerdtree'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'tpope/vim-endwise'
@@ -132,8 +136,7 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
-" Plug 'ryanoasis/vim-devicons' Icons without colours
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+""Plug 'dense-analysis/ale'
 call plug#end()
 
 
@@ -145,23 +148,25 @@ hi Search ctermbg=Yellow ctermfg=black
 hi visual ctermbg=darkgray ctermfg=NONE
 hi Pmenu ctermbg=black
 hi PmenuSel ctermbg=lightmagenta ctermfg=black
-" tabline
+" タブライン
 hi clear TabLine
 hi TabLineFill NONE
 hi TabLine ctermbg=NONE ctermfg=white
 hi TabLineSel ctermbg=NONE ctermfg=darkred
-hi rubySymbol ctermfg=117 guifg=#89ddff
 "hi Constant ctermfg=117 guifg=#89ddff
 "hi Statement  term=bold ctermfg=11 gui=bold guifg=#ffff60
-hi rubyKeyword term=bold ctermfg=11 gui=bold guifg=#ffff60
-hi StatusLine  ctermfg=111 ctermbg=NONE guifg=#eeffff guibg=NONE
-" rubyfile color
+" ステータスライン
+hi StatusLine  ctermfg=darkred ctermbg=NONE guifg=#eeffff guibg=NONE
+" 文字
 hi Normal ctermfg=white guifg=white
-" normal
+" rubyのカラー
+hi rubySymbol ctermfg=117 guifg=#89ddff
+hi SpellCap cterm=undercurl ctermfg=white ctermbg=darkred gui=undercurl guifg=#82aaff guisp=Blue
 " hi rubyMethodName term=underline ctermfg=yellow guifg=yellow
 " hi rubyMethodName ctermfg=176 guifg=#c792ea
-" hi rubyInstanceVariable ctermfg=203 guifg=#ff5370
-" hi Comment ctermfg=darkgray guifg=Blue
+hi rubyKeyword term=bold ctermfg=11 gui=bold guifg=#ffff60
+hi rubyInstanceVariable ctermfg=203 guifg=#ff5370
+hi Comment ctermfg=darkgray guifg=Blue
 
 
 " UltiSnipsの環境構築
@@ -204,9 +209,23 @@ nnoremap <leader>ig :call ToggleIndentBlankline()<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
-" <leader>eでNERDTreeが起動する
+" <leader>nでNERDTreeが起動する
 nnoremap <silent><leader>n :NERDTreeToggle<CR>
 
 " fizzy finderの設定
 " <leader>fでfizzy finderが起動する
 nnoremap  <silent><leader>f :FZF<CR>
+" <Leader>vsでvsplitしつつFZF起動
+command! VS vsplit | FZF
+nnoremap <Leader>vs :VS<CR>
+
+" coc.nvimの設定
+" 定義ジャンプ
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+
+" aleの設定
+" let g:ale_disable_lsp = 1
+" let g:ale_lint_on_text_changed = 1
