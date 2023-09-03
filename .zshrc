@@ -35,10 +35,10 @@ function my_custom_prompt {
       git_branch="%F{yellow}${git_branch}"
     fi
 
-    PROMPT="%n %F{cyan}%c ${git_branch}%F{white} %# "
+    PROMPT="%n %F{117}%c ${git_branch} %F{white}%# "
   else
     # Gitで管理されていない場合は何も表示しない
-    PROMPT="%n %F{magenta}%c %F{white}%# "
+    PROMPT="%n %F{117}%c %F{white}%# "
   fi
 }
 
@@ -53,6 +53,7 @@ colors
 
 # lsでカラー表示するための設定
 alias ls='gls --color=auto'
+# eval "$(gdircolors ~/.dircolors-solarized/dircolors.256dark)"
 
 
 # 設定ファイル関係
@@ -61,6 +62,9 @@ alias vim="nvim"
 
 # initvimでneovimの設定ファイルを開く
 alias initvim="nvim ~/.config/nvim/init.vim"
+
+# initluaでneovimのluaファイルを開く
+alias initlua="nvim ~/.config/nvim/init.lua"
 
 # vimrcでvimの設定ファイルを開く
 alias vimrc="vi ~/.vimrc"
@@ -93,47 +97,74 @@ alias :q="exit"
 
 
 # rails関係のalias
+# rでbin/railsを補完する
+alias r="bin/rails"
+
 # rsで"bin/rails server"を実行する
 alias rs="bin/rails server"
 
 # rcで"bin/rails console"を実行する
 alias rc="bin/rails console"
 
-# rでbin/railsを補完する
-alias r="bin/rails"
+# rgmでbin/rails g modelを補完する
+alias rgm="bin/rails g model"
 
-# rrでbin/rails routesを補完する
-alias rr="bin/rails routes"
+# rgcでbin/rails g controllerを補完する
+alias rgc="bin/rails g controller"
 
-# rmigrateでbin/rails db:migrateを補完する
-alias rmigrate="bin/rails db:migrate"
+# rdmでbin/rails d modelを補完する
+alias rdm="bin/rails d model"
 
-# rstatusでbin/rails db:migrate:statusを補完する
-alias rstatus="bin/rails db:migrate:status"
+# rdcでbin/rails d controllerを補完する
+alias rdc="bin/rails d controller"
 
-# rmigrateresetでbin/rails db:migrate:resetを補完する
-alias rmigratereset="bin/rails db:migrate:reset"
-
-# rresetでbin/rails db:resetを補完する
-alias rreset="bin/rails db:reset"
-
-# rbackでbin/rails db:rollbackを補完する
-alias rback="bin/rails db:rollback"
-
-# rcreateでbin/rails db:createを補完する
-alias rcreate="bin/rails db:create"
-
-# rdropでbin/rails db:dropを補完する
-alias rdrop="bin/rails db:drop"
-
-# bvでbundle execを補完する
+# beでbundle execを補完する
 alias be="bundle exec"
+
+# berでbundle exec rspecを補完する
+alias ber="bundle exec rspec"
 
 # bでbundle installを補完する
 alias b="bundle install"
 
 # bvでbin/devを補完する(rails7以降)
 alias bv="bin/dev"
+
+# rrでbin/rails routesを補完する(ルーティングの確認)
+alias rr="bin/rails routes"
+
+# rrgでbin/rails routes -gを補完する(指定したルーティングを確認)
+alias rrg="bin/rails routes -g"
+
+# rrcでbin/rails routes -cを補完する(指定したルーティングを確認)
+alias rrc="bin/rails routes -c"
+
+# rregでbin/rails routes --expanded -gを補完する(指定したルーティングの詳細を確認)
+alias rreg="bin/rails routes --expanded -g"
+
+# rrecでbin/rails routes --expanded -cを補完する(指定したルーティングの詳細を確認)
+alias rrec="bin/rails routes --expanded -c"
+
+# rdmでbin/rails db:migrateを補完する(マイグレーションを実行)
+alias rdm="bin/rails db:migrate"
+
+# rdbでbin/rails db:rollbackを補完する(1番最後のマイグレーションを未実行にする)
+alias rdb="bin/rails db:rollback"
+
+# rdmsでbin/rails db:migrate:statusを補完する(実行中のマイグレーションを確認)
+alias rdms="bin/rails db:migrate:status"
+
+# rdmrでbin/rails db:migrate:resetを補完する(マイグレーションをリセットし再実行)
+alias rdmr="bin/rails db:migrate:reset"
+
+# rdrでbin/rails db:resetを補完する(データベースをリセットし再実行)
+alias rdr="bin/rails db:reset"
+
+# rdcでbin/rails db:createを補完する(データベースを作成する)
+alias rdc="bin/rails db:create"
+
+# rddでbin/rails db:dropを補完する(データベースを削除する)
+alias rdd="bin/rails db:drop"
 
 
 # 補完機能関係
@@ -153,3 +184,7 @@ zstyle ':completion:*' menu select
 # 補完候補をできるだけ詰めて表示する
 setopt list_packed
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
