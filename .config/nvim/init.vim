@@ -67,12 +67,14 @@ nnoremap Q :q!<CR>
 " vvでビジュアル矩形モード
 vnoremap v <C-v>
 
-" :rで.rbファイルを保存して実行する
+" :Rで.rbファイルを保存して実行する
 command! R w | !ruby %
-" :vでinit.vimファイルを保存して実行する
+" :Vでinit.vimファイルを保存して実行する
 command! V w | source %
 ""nnoremap  :V
 
+
+" タブラインの設定
 command! -nargs=1 -complete=help Vh :vertical belowright help <args>
 
 " タブの表示及び移動の設定
