@@ -69,14 +69,34 @@ alias initlua="nvim ~/.config/nvim/init.lua"
 # vimrcでvimの設定ファイルを開く
 alias vimrc="vi ~/.vimrc"
 
-# vxでtmuxの設定ファイルを開く
-alias vx="vim ~/.tmux.conf"
+# vtでtmuxの設定ファイルを開く
+alias vt="vim ~/.tmux.conf"
 
 # vzでZshの設定ファイルを開く
 alias vz="vim ~/.zshrc"
 
 # szでZshファイルを実行する
 alias sz="source ~/.zshrc"
+
+
+# tmux関係
+# tnsでtmux new -sを実行する(セッション名をつけて新規セッション開始)
+alias tns="tmux new -s"
+
+# tlでtmux lsを実行する(セッションの一覧)
+alias tl="tmux ls"
+
+# taでtmux aを実行する(セッションの移動)
+alias ta="tmux a"
+
+# tatでtmux a -tを実行する(指定のセッションに移動)
+alias tat="tmux a -t"
+
+# tkでtmux kill-session -tを実行する(指定のセッションを終了する)
+alias tk="tmux kill-session -t"
+
+# tkstでtmux kill-session -tを実行する(tmux全体を終了する)
+alias tks="tmux kill-server"
 
 
 # ターミナル操作関係
@@ -166,6 +186,18 @@ alias rdc="bin/rails db:create"
 # rddでbin/rails db:dropを補完する(データベースを削除する)
 alias rdd="bin/rails db:drop"
 
+
+# 移動系エイリアス
+# ~/rでrails基礎に移動
+alias ~/n="cd ~/workspace/20956_ke-sato97_runteq_curriculum_normal"
+
+# ~/pでportfolioに移動
+alias ~/p="cd ~/workspace/portfolio_01/portfolio"
+
+# テストアプリ系
+alias ~/2="cd ~/practice/practice_02"
+alias ~/r="cd ~/practice/practice_02/rakuten_api"
+alias ~/j="cd ~/practice/practice_02/stimulus_autocomplete_importmap"
 
 # 補完機能関係
 # 補完を強力にする
