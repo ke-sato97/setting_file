@@ -7,7 +7,7 @@ set smartindent
 set textwidth=0
 set autoindent
 set clipboard=unnamed
-set laststatus=0
+set laststatus=3
 set wildmenu
 set noswapfile
 set fileencodings=utf-8,cp932
@@ -33,13 +33,13 @@ inoremap ' ''<LEFT>
 " ESCキーをjkに変更
 inoremap jj <ESC>
 " Escの2回押しでハイライト消去"
-nnoremap <ESC><ESC> :nohlsearch<CR>
-" Hで行頭に移動
-nnoremap H ^
-vnoremap H ^
-" Lで行末に移動
-nnoremap L $
-vnoremap L $
+" "nnoremap <ESC><ESC> :nohlsearch<CR>
+" " Hで行頭に移動
+" "nnoremap H ^
+" "vnoremap H ^
+" " Lで行末に移動
+" "nnoremap L $
+" "vnoremap L $
 " Jで10行下に移動
 nnoremap J 10j
 " Kで10行上に移動
@@ -63,7 +63,7 @@ nnoremap <Leader>o <C-w><C-w>
 " <Leader>vsで縦に画面分割
 nnoremap vs :vsplit<CR>
 " Qで強制終了
-nnoremap Q :q!<CR>
+" nnoremap Q :q!<CR>
 " vvでビジュアル矩形モード
 vnoremap v <C-v>
 
@@ -102,7 +102,7 @@ function! s:my_tabline()  "{{{
   return s
 endfunction "}}}
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
-set showtabline=2 " 常にタブラインを表示
+set showtabline=0 " 常にタブラインを表示
 
 " <leader>をプレフィックスキーに設定
 nnoremap    [Tag]   <Nop>
@@ -150,22 +150,24 @@ hi Search ctermbg=Yellow ctermfg=black
 hi visual ctermbg=darkgray ctermfg=NONE
 hi Pmenu ctermbg=black
 hi PmenuSel ctermbg=lightmagenta ctermfg=black
+
 " タブライン
 hi clear TabLine
 hi TabLineFill NONE
 hi TabLine ctermbg=NONE ctermfg=white
 hi TabLineSel ctermbg=NONE ctermfg=darkred
+hi LineNr ctermfg=202
+hi Normal ctermfg=white guifg=white
 "hi Constant ctermfg=117 guifg=#89ddff
 "hi Statement  term=bold ctermfg=11 gui=bold guifg=#ffff60
 " ステータスライン
 hi StatusLine  ctermfg=darkred ctermbg=NONE guifg=#eeffff guibg=NONE
 " 文字
-hi Normal ctermfg=white guifg=white
+" hi Normal ctermfg=white guifg=white
 " rubyのカラー
 hi rubySymbol ctermfg=117 guifg=#89ddff
 hi SpellCap cterm=undercurl ctermfg=white ctermbg=darkred gui=undercurl guifg=#82aaff guisp=Blue
-" hi rubyMethodName term=underline ctermfg=yellow guifg=yellow
-" hi rubyMethodName ctermfg=176 guifg=#c792ea
+"hi rubyMethodName term=underline ctermfg=209 guifg=209
 hi rubyKeyword term=bold ctermfg=11 gui=bold guifg=#ffff60
 hi rubyInstanceVariable ctermfg=203 guifg=#ff5370
 hi Comment ctermfg=darkgray guifg=Blue
