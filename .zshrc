@@ -60,6 +60,9 @@ alias ls='gls --color=auto'
 # vimと入力するとNeovimが起動する
 alias vim="nvim"
 
+# vimと入力するとNeovimが起動する
+# alias vimf="nvim $(fzf)"
+
 # initvimでneovimの設定ファイルを開く
 alias initvim="nvim ~/.config/nvim/init.vim"
 
@@ -80,13 +83,13 @@ alias sz="source ~/.zshrc"
 
 
 # tmux関係
-# tnsでtmux new -sを実行する(セッション名をつけて新規セッション開始)
-alias tns="tmux new -s"
+# tmuxsでtmux new -sを実行する(セッション名をつけて新規セッション開始)
+alias tmuxs="tmux new -s"
 
 # tlでtmux lsを実行する(セッションの一覧)
 alias tl="tmux ls"
 
-# taでtmux aを実行する(セッションの移動)
+# taでtmux aを実行する(直前のセッションに移動)
 alias ta="tmux a"
 
 # tatでtmux a -tを実行する(指定のセッションに移動)
@@ -187,17 +190,25 @@ alias rdc="bin/rails db:create"
 alias rdd="bin/rails db:drop"
 
 
-# 移動系エイリアス
-# ~/rでrails基礎に移動
-alias ~/n="cd ~/workspace/20956_ke-sato97_runteq_curriculum_normal"
+# 移動関係
+# cd を打たなくていい
+setopt auto_cd
 
-# ~/pでportfolioに移動
-alias ~/p="cd ~/workspace/portfolio_01/portfolio"
+# ~nで下記のファイルに移動できる
+hash -d n=~/workspace/20956_ke-sato97_runteq_curriculum_normal
 
-# テストアプリ系
-alias ~/2="cd ~/practice/practice_02"
-alias ~/r="cd ~/practice/practice_02/rakuten_api"
-alias ~/j="cd ~/practice/practice_02/stimulus_autocomplete_importmap"
+# ~portで下記のファイルに移動できる
+hash -d port=~/workspace/portfolio_01/portfolio
+
+# ~rakutenで下記のファイルに移動できる
+hash -d rakuten=~/practice/practice_02/rakuten_api
+
+# ~rakutenで下記のファイルに移動できる
+hash -d js=~/practice/practice_02/javascript_01
+
+# ~settingで下記のファイルに移動できる
+hash -d setting=~/setting_file
+
 
 # 補完機能関係
 # 補完を強力にする
@@ -216,7 +227,40 @@ zstyle ':completion:*' menu select
 # 補完候補をできるだけ詰めて表示する
 setopt list_packed
 
+# 記入中のコマンドを一旦退かす
+bindkey '^U' push-line
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# 履歴検索関係
+# 保存する履歴の件数を10万にする
+export SAVEHIST=100000
+
+# すでに存在するヒストリファイルにヒストリを追記
+setopt append_history
+# ヒストリファイルを複数のzshで共有。ターミナルを複数開く時に有効
+setopt share_history
+# 過去に実行したことのあるコマンドは記録しない
+setopt hist_ignore_all_dups
+
+# ^Sを有効にする
+stty -ixon
+
+# キーバインドを設定
+bindkey -e
+
+# インクリメンタルサーチ
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+
+# ビギニングサーチ
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
+
+alias localhost="open http://localhost:3000/"
+alias github="open https://github.com/ke-sato97"
+alias runteq="open https://school.runteq.jp/v2/portfolios/824"
+alias notion="open https://www.notion.so/78f0911c98084dddb66af30f5c7e14de"
