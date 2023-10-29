@@ -227,8 +227,11 @@ zstyle ':completion:*' menu select
 # 補完候補をできるだけ詰めて表示する
 setopt list_packed
 
-# 記入中のコマンドを一旦退かす
-bindkey '^U' push-line
+# 補完に色をつける
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# 小文字でも大文字ディレクトリ、ファイルを補完できるようにする
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -259,6 +262,9 @@ bindkey '^S' history-incremental-search-forward
 # ビギニングサーチ
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
+
+# 記入中のコマンドを一旦退かす
+bindkey '^U' push-line
 
 alias localhost="open http://localhost:3000/"
 alias github="open https://github.com/ke-sato97"
