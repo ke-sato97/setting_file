@@ -47,6 +47,19 @@ precmd() {
 }
 
 
+# RPROMPTをカスタマイズする関数
+set_rprompt() {
+    if [[ $? -eq 0 ]]; then
+        RPROMPT='%F{green}OK%f'
+    else
+        RPROMPT='%F{red}NG%f'  # 条件に一致しない場合、RPROMPTを非表示にする
+    fi
+}
+
+# プロンプトの表示前にRPROMPTを設定
+precmd_functions+=(set_rprompt)
+
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
@@ -83,8 +96,11 @@ alias sz="source ~/.zshrc"
 
 
 # tmux関係
-# tmuxsでtmux new -sを実行する(セッション名をつけて新規セッション開始)
-alias tmuxs="tmux new -s"
+# tでtmuxを実行する(セッション名をつけて新規セッション開始)
+alias t="tmux"
+
+# tsでtmux new -sを実行する(セッション名をつけて新規セッション開始)
+alias ts="tmux new -s"
 
 # tlでtmux lsを実行する(セッションの一覧)
 alias tl="tmux ls"
@@ -211,6 +227,10 @@ hash -d setting=~/setting_file
 
 
 # 補完機能関係
+# 補完を有効にする
+autoload -U compinit
+compinit
+
 # 補完を強力にする
  if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
@@ -218,14 +238,27 @@ hash -d setting=~/setting_file
   autoload -Uz compinit && compinit
  fi
 
+# 設定関係
+# emax風のキーバインドを設定
+bindkey -e
+
 # コマンドミスを修正
 setopt correct
 
-# 補完の選択を楽にする
-zstyle ':completion:*' menu select
+# コマンドラインでも 以降をコメントと見なす
+setopt interactive_comments
+
+# ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+setopt auto_param_slash
+
+# カッコを自動補完
+setopt auto_param_keys
 
 # 補完候補をできるだけ詰めて表示する
 setopt list_packed
+
+# 補完の選択を楽にする
+zstyle ':completion:*' menu select
 
 # 補完に色をつける
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
@@ -248,12 +281,11 @@ setopt append_history
 setopt share_history
 # 過去に実行したことのあるコマンドは記録しない
 setopt hist_ignore_all_dups
+# 重複するコマンドが保存されるとき、古い方を削除する
+setopt hist_save_no_dups
 
 # ^Sを有効にする
 stty -ixon
-
-# キーバインドを設定
-bindkey -e
 
 # インクリメンタルサーチ
 bindkey '^R' history-incremental-search-backward
@@ -263,8 +295,8 @@ bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
 
-# 記入中のコマンドを一旦退かす
-bindkey '^U' push-line
+# 入力中の文字を一旦どかす
+bindkey '^G' push-line
 
 alias localhost="open http://localhost:3000/"
 alias github="open https://github.com/ke-sato97"
