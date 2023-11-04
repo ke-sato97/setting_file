@@ -23,13 +23,22 @@ autocmd BufWritePre * :%s/\s\+$//ge
 " キーマップの設定変更
 " <Leader>キーをスペースキーに設定
 let mapleader = "\<Space>"
-" 括弧内にカーソルを合わせる
+"括弧内にカーソルを合わせる
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap ( ()<ESC>i
+inoremap (<Enter> ()<Left><CR><ESC><S-o>
+inoremap { {}<Left>
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
 inoremap < <><LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
+" インサートモードでもカーソル移動可能
+inoremap <C-j>  <down>
+inoremap <C-k>  <up>
+inoremap <C-h>  <left>
+inoremap <C-l>  <right>
 " ESCキーをjkに変更
 inoremap jj <ESC>
 " Escの2回押しでハイライト消去"
@@ -60,8 +69,10 @@ nnoremap <Space>j :bprev<CR>
 nnoremap <Space>k :bnext<CR>
 " <Leader>oで分割した画面の移動
 nnoremap <Leader>o <C-w><C-w>
-" <Leader>vsで縦に画面分割
+" <Leader>vsで縦に画面を垂直分割
 nnoremap vs :vsplit<CR>
+" <Leader>spで縦に画面を水平分割
+nnoremap sp :split<CR>
 " Qで強制終了
 " nnoremap Q :q!<CR>
 " vvでビジュアル矩形モード
@@ -189,7 +200,7 @@ let g:UltiSnipsEditSplit='vertical'
 let g:coc_snippet_next = '<C-n>'
 let g:coc_snippet_prev = '<C-p>'
 " <Leader>sを:UltiSnipsEditコマンドに割り当て
-nnoremap <silent> <Leader>s :UltiSnipsEdit<CR>
+nnoremap <silent> <Leader>us :UltiSnipsEdit<CR>
 
 
 " <leader>igでindent-blankline.nvimの表示・非表示を切り替える ※最初だけ２回
@@ -222,6 +233,10 @@ nnoremap  <silent><leader>f :FZF<CR>
 " <Leader>vsでvsplitしつつFZF起動
 command! VS vsplit | FZF
 nnoremap <Leader>vs :VS<CR>
+" <Leader>spでsplitしつつFZF起動
+command! SP split | FZF
+nnoremap <Leader>sp :SP<CR>
+
 
 " coc.nvimの設定
 " 定義ジャンプ
