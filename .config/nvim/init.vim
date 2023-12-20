@@ -49,6 +49,10 @@ inoremap jj <ESC>
 " " Lで行末に移動
 " "nnoremap L $
 " "vnoremap L $
+" jで改行していてもそのまま下に移動できる
+nnoremap j gj
+" kで改行していてもそのまま上に移動できる
+nnoremap k gk
 " Jで10行下に移動
 nnoremap J 10j
 " Kで10行上に移動
