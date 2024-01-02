@@ -18,10 +18,18 @@ eval "$(rbenv init - zsh)"
 eval "$(pyenv init -)"
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
+# mysql
+export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+# nodenv
+export PATH="$HOME/.nodenv/bin:$PATH"
+eval "$(nodenv init --no-rehash -)"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # カスタムプロンプト関数
 function my_custom_prompt {
   local git_branch
+  # ブランチ名を取得
   git_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
   if [[ $? -eq 0 ]]; then
@@ -45,19 +53,19 @@ function my_custom_prompt {
 precmd() {
   my_custom_prompt
 }
-
-
-# RPROMPTをカスタマイズする関数
-set_rprompt() {
-    if [[ $? -eq 0 ]]; then
-        RPROMPT='%F{green}OK%f'
-    else
-        RPROMPT='%F{red}NG%f'  # 条件に一致しない場合、RPROMPTを非表示にする
-    fi
-}
-
-# プロンプトの表示前にRPROMPTを設定
-precmd_functions+=(set_rprompt)
+#
+#
+# # RPROMPTをカスタマイズする関数
+# set_rprompt() {
+#     if [[ $? -eq 0 ]]; then
+#         RPROMPT='%F{green}OK%f'
+#     else
+#         RPROMPT='%F{red}NG%f'  # 条件に一致しない場合、RPROMPTを非表示にする
+#     fi
+# }
+#
+# # プロンプトの表示前にRPROMPTを設定
+# precmd_functions+=(set_rprompt)
 
 
 # 色を使用出来るようにする
@@ -130,6 +138,12 @@ alias mkdir="mkdir -p"
 
 # ..で1つ上のディレクトリに移動
 alias ..="cd .."
+
+# ...で2つ上のディレクトリに移動
+alias ...='cd ../..'
+
+# ....で3つ上のディレクトリに移動
+alias ....='cd ../../..'
 
 # :qで終了
 alias :q="exit"
@@ -210,20 +224,32 @@ alias rdd="bin/rails db:drop"
 # cd を打たなくていい
 setopt auto_cd
 
-# ~nで下記のファイルに移動できる
-hash -d n=~/workspace/20956_ke-sato97_runteq_curriculum_normal
+# ~v2で下記のファイルに移動できる
+hash -d v2=~/workspace/20956_ke-sato97_runteq_curriculum_normal
+alias v2="~v2"
+
+# ~v3で下記のファイルに移動できる
+hash -d v3=~/workspace/45601_ke-sato97_basic_rails_basic
+alias v3="~v3"
 
 # ~portで下記のファイルに移動できる
-hash -d port=~/workspace/portfolio_01/portfolio
+hash -d portfolio=~/workspace/portfolio_01/portfolio
+alias port="~portfolio"
 
 # ~rakutenで下記のファイルに移動できる
-hash -d rakuten=~/practice/practice_02/rakuten_api
+hash -d rakuten_api=~/practice/practice_02/rakuten_api
+alias rakuten="~rakuten_api"
 
 # ~rakutenで下記のファイルに移動できる
 hash -d js=~/practice/practice_02/javascript_01
 
 # ~settingで下記のファイルに移動できる
-hash -d setting=~/setting_file
+hash -d setting_file=~/setting_file
+alias setting="~setting_file"
+
+# ~praで下記のファイルに移動できる
+hash -d practice_02=~/practice/practice_02
+alias pra="~practice_02"
 
 
 # 補完機能関係
@@ -237,6 +263,7 @@ compinit
   source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   autoload -Uz compinit && compinit
  fi
+
 
 # 設定関係
 # emax風のキーバインドを設定
@@ -298,7 +325,15 @@ bindkey '^N' history-beginning-search-forward
 # 入力中の文字を一旦どかす
 bindkey '^G' push-line
 
+# C-d によるログアウト入力を防止（百回までは無視する）
+set -o ignoreeof
+IGNOREEOF=100
+
 alias localhost="open http://localhost:3000/"
 alias github="open https://github.com/ke-sato97"
-alias runteq="open https://school.runteq.jp/v2/portfolios/824"
 alias notion="open https://www.notion.so/78f0911c98084dddb66af30f5c7e14de"
+alias udemy="open https://www.udemy.com/home/my-courses/learning/"
+
+# RUNTEQ関係
+alias runteq="open https://school.runteq.jp/v2/job_hunting_steps"
+alias rq="open https://school.runteq.jp/v2/questions"
