@@ -329,10 +329,9 @@ bindkey '^G' push-line
 set -o ignoreeof
 IGNOREEOF=100
 
-# ターミナルからChromを開く
 alias localhost="open http://localhost:3000/"
 alias github="open https://github.com/ke-sato97"
-alias notion="open https://www.notion.so/78f0911c98084dddb66af30f5c7e14de"
+# alias notion="open https://www.notion.so/78f0911c98084dddb66af30f5c7e14de"
 alias udemy="open https://www.udemy.com/home/my-courses/learning/"
 
 # RUNTEQ関係
@@ -341,3 +340,6 @@ alias rq="open https://school.runteq.jp/v2/questions"
 
 # ターミナルからアプリを開く
 alias matter="open -a 'Mattermost'"
+alias notion="open -a 'Notion'"
+alias deepl="open -a 'DeepL'"
+alias dockerapp="open -a 'open -a 'Docker'"
