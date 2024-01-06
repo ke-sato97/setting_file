@@ -333,6 +333,7 @@ alias localhost="open http://localhost:3000/"
 alias github="open https://github.com/ke-sato97"
 # alias notion="open https://www.notion.so/78f0911c98084dddb66af30f5c7e14de"
 alias udemy="open https://www.udemy.com/home/my-courses/learning/"
+alias aws="open https://622632050536.signin.aws.amazon.com/console"
 
 # RUNTEQ関係
 alias runteq="open https://school.runteq.jp/v2/job_hunting_steps"
